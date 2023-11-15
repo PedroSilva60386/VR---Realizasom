@@ -20,7 +20,7 @@ public class Puck_Behaviour : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         
         if (Input.GetButtonDown(inputAction))
