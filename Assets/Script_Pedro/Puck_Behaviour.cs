@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class ControlledMovePuck : MonoBehaviour
+public class Puck_Behaviour : MonoBehaviour
 {
     public float speed = 5f;
-    public OVRInput.Button startButton = OVRInput.Button.Two; // Change to the desired button
+    public string inputAction = "Fire1"; // Change to the desired action
 
     private bool puckStarted = false;
 
     void Update()
     {
-        // Check if the specified button is pressed
-        if (OVRInput.GetDown(startButton))
+        // Check if the specified action is triggered
+        if (Input.GetButtonDown(inputAction) && !puckStarted)
         {
             StartMoving();
         }
