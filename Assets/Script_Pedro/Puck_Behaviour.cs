@@ -24,11 +24,13 @@ public class Puck_Behaviour : MonoBehaviour
     private GameObject paddle;
     
     private float puckRadius;
+    private float paddleRadius;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         puckRadius = transform.localScale.x;
+        paddleRadius = paddle.transform.localScale.x;
     }
 
     void FixedUpdate()
@@ -48,19 +50,11 @@ public class Puck_Behaviour : MonoBehaviour
     void colisionPaddle()
     {
         Vector3 puckPosition = transform.position;
-        //if ((puckPosition.x + transform.localScale.x < paddle.transform.position.x + paddle.transform.localScale.x))
-        //{
-            //Vector3 v = rb.velocity;
-            //rb.velocity = new Vector3(-v.x, v.y, -v.z);
-        //}
-
-        if ((puckPosition.z + puckRadius < paddle.transform.position.z + puckRadius))
+        if ((puckPosition.x + transform.localScale.x <= paddle.transform.position.x + paddleRadius) && (puckPosition.z + puckRadius <= paddle.transform.position.z + paddleRadius))
         {
             Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(v.x, v.y, -v.z);
+            rb.velocity = new Vector3(-v.x, v.y, -v.z);
         }
-        
-        
     }
 
     void colisionWalls()
