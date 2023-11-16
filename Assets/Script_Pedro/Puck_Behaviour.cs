@@ -58,7 +58,8 @@ public class Puck_Behaviour : MonoBehaviour
 
         Vector3 vv = rb.velocity;
 
-        rb.velocity = vv * 0.99999f;
+        rb.velocity = vv * 0.999f;
+    
 
     }
 
