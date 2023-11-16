@@ -1729,6 +1729,7 @@ MonoBehaviour:
   bottomtWall: {fileID: 3042360238493684252}
   forceMultiplier: 150
   inputAction: Fire1
+  paddle: {fileID: 0}
 --- !u!1001 &667427258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1750,6 +1751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 1.0395463
+      objectReference: {fileID: 0}
+    - target: {fileID: 172958876597838954, guid: 9d00454e0fac12848976b56f18d5b65c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 172958876597838954, guid: 9d00454e0fac12848976b56f18d5b65c,
         type: 3}
@@ -3143,7 +3149,7 @@ PrefabInstance:
     - target: {fileID: 3784719659160783299, guid: 3674d1141bcc7e94f968ec230204421f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3784719659160783299, guid: 3674d1141bcc7e94f968ec230204421f,
         type: 3}
@@ -3203,7 +3209,7 @@ PrefabInstance:
     - target: {fileID: 3784719659160783299, guid: 3674d1141bcc7e94f968ec230204421f,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3674d1141bcc7e94f968ec230204421f, type: 3}
