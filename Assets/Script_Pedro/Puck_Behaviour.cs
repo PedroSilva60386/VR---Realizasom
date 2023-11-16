@@ -23,9 +23,12 @@ public class Puck_Behaviour : MonoBehaviour
     [SerializeField]
     private GameObject paddle;
     
+    private float puckRadius;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        puckRadius = transform.localScale.x;
     }
 
     void FixedUpdate()
@@ -51,7 +54,7 @@ public class Puck_Behaviour : MonoBehaviour
             //rb.velocity = new Vector3(-v.x, v.y, -v.z);
         //}
 
-        if ((puckPosition.z + transform.localScale.z < paddle.transform.position.z + paddle.transform.localScale.z))
+        if ((puckPosition.z + puckRadius < paddle.transform.position.z + puckRadius))
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(v.x, v.y, -v.z);
@@ -63,27 +66,27 @@ public class Puck_Behaviour : MonoBehaviour
     void colisionWalls()
     {
         Vector3 puckPosition = transform.position;
-        if (puckPosition.x + transform.localScale.x > rightWall.position.x)
+        if (puckPosition.x + puckRadius > rightWall.position.x)
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(-v.x, v.y, v.z);
         }
         
-        if (puckPosition.x - transform.localScale.x < leftWall.position.x)
+        if (puckPosition.x - puckRadius < leftWall.position.x)
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(-v.x, v.y, v.z);
         }
         
         
-        if (puckPosition.z - transform.localScale.z < bottomtWall.position.z)
+        if (puckPosition.z - puckRadius < bottomtWall.position.z)
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(v.x, v.y, -v.z);
         }
         
         
-        if (puckPosition.z + transform.localScale.z> topWall.position.z)
+        if (puckPosition.z + puckRadius > topWall.position.z)
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(v.x, v.y, -v.z);
