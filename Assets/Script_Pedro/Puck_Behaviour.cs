@@ -19,10 +19,10 @@ public class Puck_Behaviour : MonoBehaviour
     private float forceMultiplier = 5f;
     [SerializeField]
     private string inputAction = "Fire1"; // Change to the desired action
-    private Rigidbody rb;
     [SerializeField]
     private GameObject paddle;
     
+    private Rigidbody rb;
     private float puckRadius;
     private float paddleRadius;
     
@@ -54,15 +54,6 @@ public class Puck_Behaviour : MonoBehaviour
         {
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(-v.x, v.y, -v.z);
-        }
-
-        if (paddle.transform.position.x +paddleRadius > 0 && paddle.transform.position.z + paddleRadius < 0)
-        {
-            if (puckPosition.x + transform.localScale.x <= paddle.transform.position.x + paddleRadius && (puckPosition.z + puckRadius >= paddle.transform.position.z + paddleRadius))
-            {
-                Vector3 v = rb.velocity;
-                rb.velocity = new Vector3(-v.x, v.y, -v.z);
-            }
         }
     }
 
