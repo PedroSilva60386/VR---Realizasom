@@ -50,10 +50,22 @@ public class Puck_Behaviour : MonoBehaviour
     void ColisionPaddle()
     {
         Vector3 puckPosition = transform.position;
-        if ((puckPosition.x + transform.localScale.x <= paddle.transform.position.x + paddleRadius) && (puckPosition.z + puckRadius <= paddle.transform.position.z + paddleRadius))
+        if (paddle.transform.position.x <= 0)
         {
-            Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(-v.x, v.y, -v.z);
+            if ((puckPosition.x + puckRadius <= paddle.transform.position.x + paddleRadius) && (puckPosition.z + puckRadius <= paddle.transform.position.z + paddleRadius))
+            {
+                Vector3 v = rb.velocity;
+                rb.velocity = new Vector3(-v.x, v.y, -v.z);
+            }
+        }
+
+        else if (paddle.transform.position.x > 0)
+        {
+            if ((puckPosition.x + puckRadius <= paddle.transform.position.x + paddleRadius) && (puckPosition.z + puckRadius > paddle.transform.position.z + paddleRadius))
+            {
+                Vector3 v = rb.velocity;
+                rb.velocity = new Vector3(-v.x, v.y, -v.z);
+            }
         }
     }
 
