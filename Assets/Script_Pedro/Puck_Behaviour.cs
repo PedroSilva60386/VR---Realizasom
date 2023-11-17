@@ -40,14 +40,14 @@ public class Puck_Behaviour : MonoBehaviour
             Vector3 v = new Vector3(Random.value, 0, Random.value) * forceMultiplier;
             rb.AddForce(v);
         }
-        colisionWalls();
-        colisionPaddle();
+        ColisionWalls();
+        ColisionPaddle();
         
         Vector3 vv = rb.velocity;
         rb.velocity = vv * 0.999f;
     }
 
-    void colisionPaddle()
+    void ColisionPaddle()
     {
         Vector3 puckPosition = transform.position;
         if ((puckPosition.x + transform.localScale.x <= paddle.transform.position.x + paddleRadius) && (puckPosition.z + puckRadius <= paddle.transform.position.z + paddleRadius))
@@ -55,9 +55,18 @@ public class Puck_Behaviour : MonoBehaviour
             Vector3 v = rb.velocity;
             rb.velocity = new Vector3(-v.x, v.y, -v.z);
         }
+
+        if (paddle.transform.position.x +paddleRadius > 0 && paddle.transform.position.z + paddleRadius < 0)
+        {
+            if (puckPosition.x + transform.localScale.x <= paddle.transform.position.x + paddleRadius && (puckPosition.z + puckRadius >= paddle.transform.position.z + paddleRadius))
+            {
+                Vector3 v = rb.velocity;
+                rb.velocity = new Vector3(-v.x, v.y, -v.z);
+            }
+        }
     }
 
-    void colisionWalls()
+    void ColisionWalls()
     {
         Vector3 puckPosition = transform.position;
         if (puckPosition.x + puckRadius > rightWall.position.x)
