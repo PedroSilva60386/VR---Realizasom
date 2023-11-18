@@ -4382,6 +4382,11 @@ PrefabInstance:
       objectReference: {fileID: 3115473942074545437}
     - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
         type: 3}
+      propertyPath: bottomWall
+      value: 
+      objectReference: {fileID: 3042360238493684252}
+    - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
+        type: 3}
       propertyPath: bottomtWall
       value: 
       objectReference: {fileID: 3042360238493684252}
