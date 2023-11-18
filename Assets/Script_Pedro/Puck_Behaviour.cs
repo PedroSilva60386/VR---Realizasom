@@ -1,86 +1,1 @@
-using System;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
-
-public class Puck_Behaviour : MonoBehaviour
-{
-    [SerializeField]
-    private Transform leftWall;
-    [SerializeField]
-    private Transform rightWall;
-    [SerializeField]
-    private Transform topWall;
-    [SerializeField]
-    private Transform bottomtWall;
-    
-    [SerializeField]
-    private float forceMultiplier = 5f;
-    [SerializeField]
-    private string inputAction = "Fire1"; // Change to the desired action
-    [SerializeField]
-    private GameObject paddle;
-    
-    private Rigidbody rb;
-    private float puckRadius;
-    private float paddleRadius;
-    
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        puckRadius = transform.localScale.x;
-        paddleRadius = paddle.transform.localScale.x;
-    }
-
-    void FixedUpdate()
-    {
-        if (Input.GetButtonDown(inputAction))
-        {
-            Vector3 v = new Vector3(Random.value, 0, Random.value) * forceMultiplier;
-            rb.AddForce(v);
-        }
-        ColisionWalls();
-        ColisionPaddle();
-        
-        Vector3 vv = rb.velocity;
-        rb.velocity = vv * 0.999f;
-    }
-
-    void ColisionPaddle()
-    {
-        Vector3 puckPosition = transform.position;
-    }
-
-    void ColisionWalls()
-    {
-        Vector3 puckPosition = transform.position;
-        if (puckPosition.x + puckRadius > rightWall.position.x)
-        {
-            Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(-v.x, v.y, v.z);
-        }
-        
-        if (puckPosition.x - puckRadius < leftWall.position.x)
-        {
-            Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(-v.x, v.y, v.z);
-        }
-        
-        
-        if (puckPosition.z - puckRadius < bottomtWall.position.z)
-        {
-            Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(v.x, v.y, -v.z);
-        }
-        
-        
-        if (puckPosition.z + puckRadius > topWall.position.z)
-        {
-            Vector3 v = rb.velocity;
-            rb.velocity = new Vector3(v.x, v.y, -v.z);
-        }
-    }
-
-
-}
+using UnityEngine;using Random = UnityEngine.Random;public class Puck_Behaviour : MonoBehaviour{    [SerializeField]    private Transform leftWall;    [SerializeField]    private Transform rightWall;    [SerializeField]    private Transform topWall;    [SerializeField]    private Transform bottomWall;        [SerializeField]    private float forceMultiplier = 5f;    [SerializeField]    private string inputAction = "Fire1"; // Change to the desired action    [SerializeField]    private GameObject paddle;        private Rigidbody _rb;        private void Start()    {        _rb = GetComponent<Rigidbody>();    }    private void FixedUpdate()    {        if (Input.GetButtonDown(inputAction))        {            var v = new Vector3(Random.value, 0, Random.value) * forceMultiplier;            _rb.AddForce(v);        }        var vv = _rb.velocity;        _rb.velocity = vv * 0.999f;    }    private void OnCollisionEnter(Collision collision)    {        Debug.Log("Entered collision with " + collision.gameObject.name);                var puckPosition = transform.position;        if (collision.gameObject.name == rightWall.gameObject.name)        {            var v = _rb.velocity;            _rb.velocity = new Vector3(-v.x, v.y, v.z);        }                if (collision.gameObject.name == leftWall.gameObject.name)        {            var v = _rb.velocity;            _rb.velocity = new Vector3(-v.x, v.y, v.z);        }                        if (collision.gameObject.name == bottomWall.gameObject.name)        {            var v = _rb.velocity;            _rb.velocity = new Vector3(v.x, v.y, -v.z);        }                        if (collision.gameObject.name == topWall.gameObject.name)        {            var v = _rb.velocity;            _rb.velocity = new Vector3(v.x, v.y, -v.z);        }                // ReSharper disable once InvertIf        if (collision.gameObject.name == paddle.gameObject.name)        {             var v = _rb.velocity;             _rb.velocity = new Vector3(-v.x, v.y, -v.z);        }    }        }
