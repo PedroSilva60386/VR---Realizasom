@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SyncPuckWithController : MonoBehaviour
+public class SyncPaddleWithController : MonoBehaviour
 {
     [SerializeField]
     private GameObject paddle;
