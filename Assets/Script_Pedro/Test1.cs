@@ -20,9 +20,12 @@ public class Test1 : MonoBehaviour
     private bool _test1;
     private bool _test2;
     private bool _test3;
-    
-    
-    
+    private Vector3 _pos1;
+    private Vector3 _pos2;
+    private Vector3 _pos3;
+    private Vector3 _posInitial;
+
+
     // Start is called before the first frame update
     private void Start()
     { 
@@ -32,6 +35,10 @@ public class Test1 : MonoBehaviour
         _test2 = false;
         _test3 = false;
         _paddleHits = 0;
+        _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
+        _pos2 = new Vector3(0.045f, 0.7998f, 1.351f);
+        _pos3 = new Vector3(-0.018f, 0.7998f, 0.188f);
+        _posInitial = transform.position;
     }
 
     // Update is called once per frame
@@ -41,7 +48,7 @@ public class Test1 : MonoBehaviour
         {
             if (Input.GetButtonDown(inputAction))
             {
-                transform.position = new Vector3(-0.556f, 0.7998f, 1.351f);
+                transform.position = _pos1;
                 _countAction++;
                 print("First action " +  _countAction);
                 if (_countAction == 2)
@@ -49,15 +56,13 @@ public class Test1 : MonoBehaviour
                     var v = new Vector3(0, 0, -20f) * forceMultiplier;
                     _rb.AddForce(v);
                     _countAction = 0;
-                    print("Second action" +  _countAction);
-                    print(transform.position);
 
                 }
             }
         }
         if (_test1 && !_test2)
         {
-            transform.position = new Vector3(0.045f, 0.7998f, 1.351f);
+            transform.position = _pos2;
             _countAction++;
             print("First action 2 " +  _countAction);
             if (_countAction == 2)
@@ -65,14 +70,12 @@ public class Test1 : MonoBehaviour
                 var v = new Vector3(0, 0, -20f) * forceMultiplier;
                 _rb.AddForce(v);
                 _countAction = 0;
-                print("Second action 2 " +  _countAction);
-                print(transform.position);
                 
             }
         }
         if (_test1 && _test2 && !_test3)
         {
-            transform.position = new Vector3(0.556f, 0.7998f, 1.351f);
+            transform.position = _pos3;
             _countAction++;
             if (_countAction == 2)
             {
@@ -88,7 +91,7 @@ public class Test1 : MonoBehaviour
     {
         if (c.gameObject.name == bottomWall.name)
         {
-            ResetGame();
+            ResetGame(_posInitial);
         }
 
         if (c.gameObject.name == paddle.name)
@@ -97,19 +100,19 @@ public class Test1 : MonoBehaviour
             if (_paddleHits == 1)
             {
                 _test1 = true;
-                ResetGame();
+                ResetGame(_pos2);
                 Debug.Log("Test1 passed");
             }
             if (_paddleHits == 2)
             {
                 _test2 = true;
-                ResetGame();
+                ResetGame(_pos3);
                 Debug.Log("Test2 passed");
             }
             if (_paddleHits == 3)
             {
                 _test3 = true;
-                ResetGame();
+                ResetGame(_posInitial);
                 Debug.Log("Test3 passed");
             }
             
@@ -119,9 +122,9 @@ public class Test1 : MonoBehaviour
        
     }
     
-     private void ResetGame()
+     private void ResetGame(Vector3 position)
      {
-         transform.position = new Vector3(-0.556f, 0.7998f, 1.544f);;
+         transform.position = position;
          _rb.velocity = Vector3.zero;
     
      }
