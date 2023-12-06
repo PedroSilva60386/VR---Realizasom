@@ -13,7 +13,8 @@ public class Test1 : MonoBehaviour
     private string inputAction = "Fire2";
     [SerializeField]
     private float forceMultiplier = 5f;
-
+    
+    private Test2 test2;
     private Rigidbody _rb;
     private int _countAction;
     private int _paddleHits;
@@ -42,6 +43,7 @@ public class Test1 : MonoBehaviour
         var transform1 = transform;
         _posInitial = transform1.position;
         transform1.position = _pos1;
+        test2 = GetComponent<Test2>();
     }
 
     // Update is called once per frame
@@ -121,6 +123,7 @@ public class Test1 : MonoBehaviour
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
+                    test2.CustomStart();
                     break;
             }
         }
