@@ -25,8 +25,9 @@ public class Test2 : MonoBehaviour
     {
         FirstPhase, SecondPhase
     }
-
     private TestPhase _testPhase;
+    
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -108,7 +109,7 @@ public class Test2 : MonoBehaviour
         _rb.velocity = Vector3.zero;
     }
 
-    public virtual void CustomStart()
+    public  void CustomStart()
     {
        print("Test 2 has begun");
     }
