@@ -21,12 +21,12 @@ public class Test1 : MonoBehaviour
     private Vector3 _pos2;
     private Vector3 _pos3;
     private Vector3 _posInitial;
-    private enum TestePhase
+    private enum TestPhase
     {
-        firstPhase, secondPhase, thirdPhase
+        FirstPhase, SecondPhase, ThirdPhase
     }
 
-    private TestePhase testePhase;
+    private TestPhase _testPhase;
 
 
     // Start is called before the first frame update
@@ -34,24 +34,25 @@ public class Test1 : MonoBehaviour
     { 
         _rb = GetComponent<Rigidbody>();
         _countAction = 0;
-        testePhase = TestePhase.firstPhase;
+        _testPhase = TestPhase.FirstPhase;
         _paddleHits = 0;
         _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
         _pos2 = new Vector3(0.045f, 0.7998f, 1.351f);
         _pos3 = new Vector3(0.556f, 0.7998f, 1.351f);
-        _posInitial = transform.position;
+        var transform1 = transform;
+        _posInitial = transform1.position;
+        transform1.position = _pos1;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (testePhase == TestePhase.firstPhase)
+        if (_testPhase == TestPhase.FirstPhase)
         {
             if (Input.GetButtonDown(inputAction))
             {
-                //transform.position = _pos1;
                 _countAction++;
-                if (_countAction == 2)
+                if (_countAction == 1)
                 {
                     var v = new Vector3(0, 0, -20f) * forceMultiplier;
                     _rb.AddForce(v);
@@ -60,14 +61,14 @@ public class Test1 : MonoBehaviour
                 }
             }
         }
-        else if (testePhase == TestePhase.secondPhase)
+        else if (_testPhase == TestPhase.SecondPhase)
         {
             if (Input.GetButtonDown(inputAction))
             {
                 //transform.position = _pos2;
                 //_rb.velocity = Vector3.zero;
                 _countAction++;
-                if (_countAction == 2)
+                if (_countAction == 1)
                 {
                     var v = new Vector3(0, 0, -20f) * forceMultiplier;
                     _rb.AddForce(v);
@@ -76,13 +77,13 @@ public class Test1 : MonoBehaviour
                 }
             }
         }
-        else if (testePhase == TestePhase.thirdPhase)
+        else if (_testPhase == TestPhase.ThirdPhase)
         {
             if (Input.GetButtonDown(inputAction))
             {
                 //transform.position = _pos3;
                 _countAction++;
-                if (_countAction == 2)
+                if (_countAction == 1)
                 {
                     var v = new Vector3(0, 0, -20f) * forceMultiplier;
                     _rb.AddForce(v);
@@ -107,17 +108,17 @@ public class Test1 : MonoBehaviour
             switch (_paddleHits)
             {
                 case 1:
-                    testePhase = TestePhase.firstPhase;
+                    _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos2);
                     Debug.Log("Test1 passed");
                     break;
                 case 2:
-                    testePhase = TestePhase.secondPhase;
+                    _testPhase = TestPhase.SecondPhase;
                     ResetGame(_pos3);
                     Debug.Log("Test2 passed");
                     break;
                 case 3:
-                    testePhase = TestePhase.thirdPhase;
+                    _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
                     break;
