@@ -27,7 +27,7 @@ public class Test2 : MonoBehaviour
     }
 
     private TestPhase _testPhase;
-    void Start()
+    private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _countAction = 0;
