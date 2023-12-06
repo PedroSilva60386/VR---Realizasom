@@ -13,8 +13,9 @@ public class Test1 : MonoBehaviour
     private string inputAction = "Fire2";
     [SerializeField]
     private float forceMultiplier = 5f;
+    [SerializeField] 
+    private GameObject puck;
     
-    private Test2 test2;
     private Rigidbody _rb;
     private int _countAction;
     private int _paddleHits;
@@ -31,23 +32,28 @@ public class Test1 : MonoBehaviour
 
 
     // Start is called before the first frame update
-    private void Start()
+
+    public void Awake()
+    {
+        print("Test 1 has started");
+    }
+
+    public void Start()
     { 
-        _rb = GetComponent<Rigidbody>();
+        _rb = puck.GetComponent<Rigidbody>();
         _countAction = 0;
         _testPhase = TestPhase.FirstPhase;
         _paddleHits = 0;
         _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
         _pos2 = new Vector3(0.045f, 0.7998f, 1.351f);
         _pos3 = new Vector3(0.556f, 0.7998f, 1.351f);
-        var transform1 = transform;
+        var transform1 = puck.transform;
         _posInitial = transform1.position;
         transform1.position = _pos1;
-        test2 = GetComponent<Test2>();
     }
 
     // Update is called once per frame
-    private void Update()
+    public void Update()
     {
         if (_testPhase == TestPhase.FirstPhase)
         {
@@ -67,8 +73,6 @@ public class Test1 : MonoBehaviour
         {
             if (Input.GetButtonDown(inputAction))
             {
-                //transform.position = _pos2;
-                //_rb.velocity = Vector3.zero;
                 _countAction++;
                 if (_countAction == 1)
                 {
@@ -83,7 +87,6 @@ public class Test1 : MonoBehaviour
         {
             if (Input.GetButtonDown(inputAction))
             {
-                //transform.position = _pos3;
                 _countAction++;
                 if (_countAction == 1)
                 {
@@ -96,7 +99,7 @@ public class Test1 : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision c)
+    public void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.name == bottomWall.name)
         {
@@ -123,7 +126,6 @@ public class Test1 : MonoBehaviour
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
-                    test2.CustomStart();
                     break;
             }
         }
@@ -131,7 +133,7 @@ public class Test1 : MonoBehaviour
     
      private void ResetGame(Vector3 position)
      {
-         transform.position = position;
+         puck.transform.position = position;
          _rb.velocity = Vector3.zero;
      }
 }

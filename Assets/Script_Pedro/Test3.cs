@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,9 @@ public class Test3 : MonoBehaviour
     private string inputAction = "Fire2";
     [SerializeField]
     private float forceMultiplier = 5f;
+    [SerializeField] 
+    private GameObject puck;
     
-    private Test3 test3;
     private Rigidbody _rb;
     private int _countAction;
     private int _paddleHits;
@@ -27,18 +29,23 @@ public class Test3 : MonoBehaviour
     private TestPhase _testPhase;
     
     // Start is called before the first frame update
+
+    public void Awake()
+    {
+        print("Test 3 has begun");
+    }
+
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = puck.GetComponent<Rigidbody>();
         _countAction = 0;
         _testPhase = TestPhase.FirstPhase;
         _paddleHits = 0;
         _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
         _pos2 = new Vector3(0.556f, 0.7998f, 1.351f);
-        var transform1 = transform;
+        var transform1 = puck.transform;
         _posInitial = transform1.position;
         transform1.position = _pos1;
-        test3 = GetComponent<Test3>();
     }
 
     // Update is called once per frame
@@ -97,7 +104,7 @@ public class Test3 : MonoBehaviour
                     _testPhase = TestPhase.SecondPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test2 passed");
-                    test3.CustomStart();
+                    Debug.Log("You have passed all the tests.");
                     break;
             }
         }
@@ -105,12 +112,7 @@ public class Test3 : MonoBehaviour
     
     private void ResetGame(Vector3 position)
     {
-        transform.position = position;
+        puck.transform.position = position;
         _rb.velocity = Vector3.zero;
-    }
-
-    public void CustomStart()
-    {
-       print("Test 3 has begun");
     }
 }
