@@ -14,7 +14,7 @@ public class TestController : MonoBehaviour
     {
         test1.Awake();
         test1.Start();
-        test1.Update();
+        //test1.Update();
         // test2.Awake();
         // test2.Start();
 

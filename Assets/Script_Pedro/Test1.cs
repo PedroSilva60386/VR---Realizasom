@@ -62,7 +62,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) * forceMultiplier;
+                    var v = new Vector3(0, 0, -20f) ;
                     _rb.AddForce(v);
                     _countAction = 0;
 
@@ -76,7 +76,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) * forceMultiplier;
+                    var v = new Vector3(0, 0, -20f) ;
                     _rb.AddForce(v);
                     _countAction = 0;
                                 
@@ -90,7 +90,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) * forceMultiplier;
+                    var v = new Vector3(0, 0, -20f) ;
                     _rb.AddForce(v);
                     _countAction = 0;
              
