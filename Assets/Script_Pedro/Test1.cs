@@ -8,7 +8,7 @@ public class Test1 : MonoBehaviour
     [SerializeField]
     private GameObject paddle;
     [SerializeField]
-    private Transform bottomWall;
+    private Transform goal;
     [SerializeField]
     private string inputAction = "Fire2";
     [SerializeField]
@@ -62,7 +62,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) ;
+                    var v = new Vector3(0, 0, -20f) * forceMultiplier ;
                     _rb.AddForce(v);
                     _countAction = 0;
 
@@ -76,7 +76,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) ;
+                    var v = new Vector3(0, 0, -20f)  * forceMultiplier;
                     _rb.AddForce(v);
                     _countAction = 0;
                                 
@@ -90,7 +90,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
-                    var v = new Vector3(0, 0, -20f) ;
+                    var v = new Vector3(0, 0, -20f)  * forceMultiplier;
                     _rb.AddForce(v);
                     _countAction = 0;
              
@@ -101,7 +101,7 @@ public class Test1 : MonoBehaviour
 
     public void OnCollisionEnter(Collision c)
     {
-        if (c.gameObject.name == bottomWall.name)
+        if (c.gameObject.name == goal.name)
         {
             ResetGame(_posInitial);
         }

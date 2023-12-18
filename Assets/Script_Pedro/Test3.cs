@@ -8,7 +8,7 @@ public class Test3 : MonoBehaviour
     [SerializeField]
     private GameObject paddle;
     [SerializeField]
-    private Transform bottomWall;
+    private Transform goal;
     [SerializeField]
     private string inputAction = "Fire2";
     [SerializeField]
@@ -84,7 +84,7 @@ public class Test3 : MonoBehaviour
     
     private void OnCollisionEnter(Collision c)
     {
-        if (c.gameObject.name == bottomWall.name)
+        if (c.gameObject.name == goal.name)
         {
             ResetGame(_posInitial);
         }

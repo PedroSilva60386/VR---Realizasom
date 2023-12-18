@@ -9,7 +9,7 @@ public class Test2 : MonoBehaviour
     [SerializeField]
     private GameObject paddle;
     [SerializeField]
-    private Transform bottomWall;
+    private Transform goal;
     [SerializeField]
     private string inputAction = "Fire2";
     [SerializeField]
@@ -43,8 +43,8 @@ public class Test2 : MonoBehaviour
         _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
         _pos2 = new Vector3(0.556f, 0.7998f, 1.351f);
         var transform1 = puck.transform;
-        _posInitial = transform1.position;
         transform1.position = _pos1;
+        _posInitial = transform1.position;
     }
 
     // Update is called once per frame
@@ -82,7 +82,7 @@ public class Test2 : MonoBehaviour
     }
     private void OnCollisionEnter(Collision c)
     {
-        if (c.gameObject.name == bottomWall.name)
+        if (c.gameObject.name == goal.name)
         {
             ResetGame(_posInitial);
         }

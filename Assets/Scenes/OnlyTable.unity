@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddle: {fileID: 1711873346}
-  bottomWall: {fileID: 3042360238493684252}
+  goal: {fileID: 0}
   inputAction: Fire2
   forceMultiplier: 5
   puck: {fileID: 26336470}
@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddle: {fileID: 1711873346}
-  bottomWall: {fileID: 3042360238493684252}
+  goal: {fileID: 0}
   inputAction: Fire2
   forceMultiplier: 5
   puck: {fileID: 26336470}
@@ -3210,7 +3210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paddle: {fileID: 1711873346}
-  bottomWall: {fileID: 3042360238493684252}
+  goal: {fileID: 0}
   inputAction: Fire2
   forceMultiplier: 5
   puck: {fileID: 26336470}
@@ -4411,7 +4411,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8514acdb166b1499a9ee49941ff691f0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 87e0d31a0ba31764e9e7de898d4767e4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.254
   m_Pitch: 1
@@ -4497,21 +4497,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1905796473
+--- !u!114 &1905796480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26336470}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f883b3a7d60d440879b6d543308dc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1655f8d02b3e7f740b7eb3a9ebc90697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test1: {fileID: 1203048059}
-  test2: {fileID: 1561814023}
-  test3: {fileID: 420316695}
+  paddle: {fileID: 1711873346}
+  goal: {fileID: 37144334}
+  inputAction: Fire2
+  forceMultiplier: 5
+  puck: {fileID: 26336470}
 --- !u!65 &1931864706
 BoxCollider:
   m_ObjectHideFlags: 0
