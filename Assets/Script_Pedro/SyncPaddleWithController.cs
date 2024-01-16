@@ -25,7 +25,7 @@ public class SyncPaddleWithController : MonoBehaviour
         {
             Vector3 pp = paddle.transform.position;
             Vector3 cp = controller.transform.position;
-            paddle.transform.position = new Vector3(cp.x, pp.y, cp.z);
+            paddle.transform.position = new Vector3(cp.x, pp.y, pp.z);
         }
     }
     

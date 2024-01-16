@@ -4095,6 +4095,8 @@ MonoBehaviour:
   rightWall: {fileID: 3115473942074545437}
   leftWall: {fileID: 5453721153613165603}
   bottomWall: {fileID: 3042360238493684252}
+  leftBottomSideWall: {fileID: 0}
+  rightBottomSideWall: {fileID: 0}
   collisionAudio: {fileID: 1711873352}
 --- !u!1 &1806027850
 GameObject:
@@ -5549,6 +5551,16 @@ PrefabInstance:
       propertyPath: bottomWall
       value: 
       objectReference: {fileID: 3042360238493684252}
+    - target: {fileID: 1675559060221114879, guid: 355fccea45353574b94c1983202518f0,
+        type: 3}
+      propertyPath: leftBottomSideWall
+      value: 
+      objectReference: {fileID: 583000440}
+    - target: {fileID: 1675559060221114879, guid: 355fccea45353574b94c1983202518f0,
+        type: 3}
+      propertyPath: rightBottomSideWall
+      value: 
+      objectReference: {fileID: 1889335926}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 355fccea45353574b94c1983202518f0, type: 3}
 --- !u!4 &2230603120255594902
@@ -6225,7 +6237,17 @@ PrefabInstance:
       objectReference: {fileID: 2041095011}
     - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
         type: 3}
+      propertyPath: leftTopSideCorner
+      value: 
+      objectReference: {fileID: 2041095011}
+    - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
+        type: 3}
       propertyPath: RightTopSideCorner
+      value: 
+      objectReference: {fileID: 278530828}
+    - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
+        type: 3}
+      propertyPath: rightTopSideCorner
       value: 
       objectReference: {fileID: 278530828}
     - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
@@ -6235,7 +6257,17 @@ PrefabInstance:
       objectReference: {fileID: 583000440}
     - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
         type: 3}
+      propertyPath: leftBottomSideCorner
+      value: 
+      objectReference: {fileID: 583000440}
+    - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
+        type: 3}
       propertyPath: RightBottomSideCorner
+      value: 
+      objectReference: {fileID: 1889335926}
+    - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
+        type: 3}
+      propertyPath: rightBottomSideCorner
       value: 
       objectReference: {fileID: 1889335926}
     - target: {fileID: 8005990759161888618, guid: a7fd7aaa1ce4aaa4aa7994547d4c65cb,
