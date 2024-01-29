@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Test1 : MonoBehaviour
@@ -23,12 +24,16 @@ public class Test1 : MonoBehaviour
     private Vector3 _pos2;
     private Vector3 _pos3;
     private Vector3 _posInitial;
-    private enum TestPhase
+
+    [CanBeNull] public event Action OnTestStart;
+    [CanBeNull] public event Action OnTestEnd;
+
+    public enum TestPhase
     {
         FirstPhase, SecondPhase, ThirdPhase
     }
 
-    private TestPhase _testPhase;
+    public TestPhase _testPhase;
 
 
     // Start is called before the first frame update
@@ -37,6 +42,7 @@ public class Test1 : MonoBehaviour
     {
         print("Test 1 has started");
     }
+    
 
     public void Start()
     { 
@@ -62,6 +68,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
+                    OnTestStart?.Invoke();
                     var v = new Vector3(0, 0, -20f) * forceMultiplier ;
                     _rb.AddForce(v);
                     _countAction = 0;
@@ -76,6 +83,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
+                        OnTestStart?.Invoke();
                     var v = new Vector3(0, 0, -20f)  * forceMultiplier;
                     _rb.AddForce(v);
                     _countAction = 0;
@@ -90,6 +98,7 @@ public class Test1 : MonoBehaviour
                 _countAction++;
                 if (_countAction == 1)
                 {
+                    OnTestStart?.Invoke();
                     var v = new Vector3(0, 0, -20f)  * forceMultiplier;
                     _rb.AddForce(v);
                     _countAction = 0;
@@ -103,7 +112,7 @@ public class Test1 : MonoBehaviour
     {
         if (c.gameObject.name == goal.name)
         {
-            ResetGame(_posInitial);
+            ResetGame(_pos1);
         }
 
         if (c.gameObject.name == paddle.name)
@@ -116,16 +125,19 @@ public class Test1 : MonoBehaviour
                     _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos2);
                     Debug.Log("Test1 passed");
+                    OnTestEnd?.Invoke();
                     break;
                 case 2:
                     _testPhase = TestPhase.SecondPhase;
                     ResetGame(_pos3);
                     Debug.Log("Test2 passed");
+                    OnTestEnd?.Invoke();
                     break;
                 case 3:
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
+                    OnTestEnd?.Invoke();
                     break;
             }
         }
@@ -135,5 +147,6 @@ public class Test1 : MonoBehaviour
      {
          puck.transform.position = position;
          _rb.velocity = Vector3.zero;
+         _countAction = 0;
      }
 }
