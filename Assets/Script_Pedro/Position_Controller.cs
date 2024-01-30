@@ -16,18 +16,18 @@ public class Position_Controller : MonoBehaviour
     private List<Vector3> _pongPosition;
     private List<Vector3> _puckPosition;
     private List<bool> _success;
+    private List<float> _timePassed;
     private Puck_Behaviour _puckBehaviour;
     private Test1 _test1;
     private string _filePath;
     private bool _hasFileBeenWritten;
-    private float _testDuration;
     private bool _isTestRunning = false;
-     
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _testDuration = 0;
         _puckBehaviour = puck.GetComponent<Puck_Behaviour>();
         _test1 = puck.GetComponent<Test1>();
         
@@ -37,6 +37,7 @@ public class Position_Controller : MonoBehaviour
         _pongPosition = new List<Vector3>();
         _puckPosition = new List<Vector3>();
         _success = new List<bool>();
+        _timePassed = new List<float>();
         _hasFileBeenWritten = false;
 
         _test1.OnTestStart += () => _isTestRunning = true;
@@ -62,17 +63,18 @@ public class Position_Controller : MonoBehaviour
 
     private void ComputeFileName()
     {
+        var folderPath = @"C:\Users\Pedro\Desktop\Realizasom\Testes";
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss");
         switch(_test1._testPhase)
         {
             case Test1.TestPhase.FirstPhase:
-                _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "game_data_1_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_1_" + timestamp + ".csv");
                 break;
             case Test1.TestPhase.SecondPhase:
-                _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "game_data_2_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_2_" + timestamp + ".csv");
                 break;
             case Test1.TestPhase.ThirdPhase:
-                _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "game_data_3_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_3_" + timestamp + ".csv");
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -84,7 +86,7 @@ public class Position_Controller : MonoBehaviour
         _pongPosition.Clear();
         _puckPosition.Clear();
         _success.Clear();
-        _testDuration = 0;
+        _timePassed.Clear();
         _hasFileBeenWritten = false;
         _isTestRunning = false;
     }
@@ -94,7 +96,7 @@ public class Position_Controller : MonoBehaviour
     {
         if (_isTestRunning)
         {
-            _testDuration += Time.fixedTime;
+            _timePassed.Add(Time.fixedTime);
             _pongPosition.Add(_pongRb.position);
             _puckPosition.Add(_puckRb.position);
         }
@@ -115,7 +117,7 @@ public class Position_Controller : MonoBehaviour
             for (var i = 0; i < _pongPosition.Count; i++)
             {
                 var line = $"{_pongPosition[i].x}," +
-                           $"{_puckPosition[i].x},{_puckPosition[i].z},{success},{_testDuration}";
+                           $"{_puckPosition[i].x},{_puckPosition[i].z},{success},{_timePassed[i]}";
                 sw.WriteLine(line);
             }
         }
