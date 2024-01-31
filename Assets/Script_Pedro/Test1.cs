@@ -24,6 +24,9 @@ public class Test1 : MonoBehaviour
     private Vector3 _pos2;
     private Vector3 _pos3;
     private Vector3 _posInitial;
+    public bool test1A;
+    public bool test1B;
+    public bool test1C;
 
     [CanBeNull] public event Action OnTestStart;
     [CanBeNull] public event Action OnTestEnd;
@@ -56,6 +59,9 @@ public class Test1 : MonoBehaviour
         var transform1 = puck.transform;
         _posInitial = transform1.position;
         transform1.position = _pos1;
+        test1A = false;
+        test1B = false;
+        test1C = false;
     }
 
     // Update is called once per frame
@@ -110,33 +116,61 @@ public class Test1 : MonoBehaviour
 
     public void OnCollisionEnter(Collision c)
     {
-        if (c.gameObject.name == goal.name)
-        {
-            ResetGame(_pos1);
-        }
-
         if (c.gameObject.name == paddle.name)
         {
             _paddleHits++;
-            print(_paddleHits);
             switch (_paddleHits)
             {
                 case 1:
+                    test1A = true;
                     _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos2);
                     Debug.Log("Test1 passed");
                     OnTestEnd?.Invoke();
                     break;
                 case 2:
+                    test1B = true;
                     _testPhase = TestPhase.SecondPhase;
                     ResetGame(_pos3);
                     Debug.Log("Test2 passed");
                     OnTestEnd?.Invoke();
                     break;
                 case 3:
+                    test1C = true;
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
+                    OnTestEnd?.Invoke();
+                    break;
+            }
+
+            test1A = false;
+            test1B = false;
+            test1C = false;
+        }
+        else if (c.gameObject.name == goal.name)
+        {
+            switch (_paddleHits)
+            {
+                case 0:
+                    test1A = false;
+                    _testPhase = TestPhase.FirstPhase;
+                    ResetGame(_pos1);
+                    Debug.Log("Test1 Failed");
+                    OnTestEnd?.Invoke();
+                    break;
+                case 1:
+                    test1B = false;
+                    _testPhase = TestPhase.SecondPhase;
+                    Debug.Log("Test2 Failed");
+                    ResetGame(_pos2);
+                    OnTestEnd?.Invoke();
+                    break;
+                case 2:
+                    test1C = false;
+                    _testPhase = TestPhase.ThirdPhase;
+                    ResetGame(_pos3);
+                    Debug.Log("Test3 Failed");
                     OnTestEnd?.Invoke();
                     break;
             }

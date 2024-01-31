@@ -111,6 +111,7 @@ public class Test2 : MonoBehaviour
     {
         puck.transform.position = position;
         _rb.velocity = Vector3.zero;
+        _countAction = 0;
     }
     
 }

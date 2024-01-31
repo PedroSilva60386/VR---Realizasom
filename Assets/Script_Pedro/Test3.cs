@@ -92,7 +92,6 @@ public class Test3 : MonoBehaviour
         if (c.gameObject.name == paddle.name)
         {
             _paddleHits++;
-            print(_paddleHits);
             switch (_paddleHits)
             {
                 case 1:
@@ -114,5 +113,6 @@ public class Test3 : MonoBehaviour
     {
         puck.transform.position = position;
         _rb.velocity = Vector3.zero;
+        _countAction = 0;
     }
 }

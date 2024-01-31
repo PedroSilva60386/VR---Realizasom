@@ -52,29 +52,29 @@ public class Position_Controller : MonoBehaviour
     private void OnTestEnd()
     {
         print("On Test End. Writing file..");
-        ComputeFileName();
         var success = false;
-        if (_puckBehaviour._collisionBotSide) success = false;
-        if (_puckBehaviour._colisionPaddle) success = true;
+        if (!_test1.test1A || !_test1.test1B || !_test1.test1C) success = false;
+        if (_test1.test1A || _test1.test1B || _test1.test1C) success = true;
+        ComputeFileName(success);
         SaveDataToCSV(success);
         ResetAll();
 
     }
 
-    private void ComputeFileName()
+    private void ComputeFileName(bool success)
     {
         var folderPath = @"C:\Users\Pedro\Desktop\Realizasom\Testes";
-        var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss");
+        var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss_");
         switch(_test1._testPhase)
         {
             case Test1.TestPhase.FirstPhase:
-                _filePath = Path.Combine(folderPath, "game_data_1_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_1_" + timestamp + "Success =" + success + ".csv");
                 break;
             case Test1.TestPhase.SecondPhase:
-                _filePath = Path.Combine(folderPath, "game_data_2_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_2_" + timestamp + "Success =" + success + ".csv");
                 break;
             case Test1.TestPhase.ThirdPhase:
-                _filePath = Path.Combine(folderPath, "game_data_3_" + timestamp + ".csv");
+                _filePath = Path.Combine(folderPath, "game_data_3_" + timestamp + "Success =" + success + ".csv");
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -83,12 +83,12 @@ public class Position_Controller : MonoBehaviour
 
     private void ResetAll()
     {
+        _isTestRunning = false;
         _pongPosition.Clear();
         _puckPosition.Clear();
         _success.Clear();
         _timePassed.Clear();
         _hasFileBeenWritten = false;
-        _isTestRunning = false;
     }
 
     // Update is called once per frame
