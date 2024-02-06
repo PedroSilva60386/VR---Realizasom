@@ -135,7 +135,7 @@ public class Test1 : MonoBehaviour
                     Debug.Log("Test2 passed");
                     OnTestEnd?.Invoke();
                     break;
-                case 3:
+                case 3: 
                     test1C = true;
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);

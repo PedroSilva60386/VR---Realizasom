@@ -63,7 +63,7 @@ public class Position_Controller : MonoBehaviour
 
     private void ComputeFileName(bool success)
     {
-        var folderPath = @"C:\Users\Pedro\Desktop\Realizasom\Testes";
+        var folderPath = @"C:\Users\fadjo\OneDrive\Ambiente de Trabalho\Pedro\Estagio\Testes";
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss_");
         switch(_test1._testPhase)
         {

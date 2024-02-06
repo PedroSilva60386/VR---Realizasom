@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Test2 : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     private GameObject paddle;
     [SerializeField]
@@ -23,19 +23,30 @@ public class Test2 : MonoBehaviour
     private Vector3 _pos1;
     private Vector3 _pos2;
     private Vector3 _posInitial;
-    private enum TestPhase
+    public bool test2A;
+    public bool test2B;
+
+    [CanBeNull] public event Action OnTestStart;
+    [CanBeNull] public event Action OnTestEnd;
+
+    public enum TestPhase
     {
         FirstPhase, SecondPhase
     }
-    private TestPhase _testPhase;
+
+    public TestPhase _testPhase;
+
+
+    // Start is called before the first frame update
 
     public void Awake()
     {
-        print("Test 2 has begun");
+        print("Test 2 has started");
     }
+    
 
     public void Start()
-    {
+    { 
         _rb = puck.GetComponent<Rigidbody>();
         _countAction = 0;
         _testPhase = TestPhase.FirstPhase;
@@ -43,75 +54,99 @@ public class Test2 : MonoBehaviour
         _pos1 = new Vector3(-0.556f, 0.7998f, 1.351f);
         _pos2 = new Vector3(0.556f, 0.7998f, 1.351f);
         var transform1 = puck.transform;
-        transform1.position = _pos1;
         _posInitial = transform1.position;
+        transform1.position = _pos1;
+        test2A = false;
+        test2B = false;
     }
 
     // Update is called once per frame
-    private void Update()
+    public void Update()
     {
+        if (_testPhase == TestPhase.FirstPhase)
         {
-            if (_testPhase == TestPhase.FirstPhase)
+            if (Input.GetButtonDown(inputAction))
             {
-                if (Input.GetButtonDown(inputAction))
+                _countAction++;
+                if (_countAction == 1)
                 {
-                    _countAction++;
-                    if (_countAction == 1)
-                    {
-                        var v = new Vector3(10f, 0, -20f) * forceMultiplier;
-                        _rb.AddForce(v);
-                        _countAction = 0;
-                    }
+                    OnTestStart?.Invoke();
+                    var v = new Vector3(-40f, 0, -20f) * forceMultiplier ;
+                    _rb.AddForce(v);
+                    _countAction = 0;
+
                 }
             }
-            else if (_testPhase == TestPhase.SecondPhase)
+        }
+        else if (_testPhase == TestPhase.SecondPhase)
+        {
+            if (Input.GetButtonDown(inputAction))
             {
-                if (Input.GetButtonDown(inputAction))
+                _countAction++;
+                if (_countAction == 1)
                 {
-                    _countAction++;
-                    if (_countAction == 1)
-                    {
-                        var v = new Vector3(-10f, 0, -20f) * forceMultiplier;
-                        _rb.AddForce(v);
-                        _countAction = 0;
-                                        
-                    }
+                        OnTestStart?.Invoke();
+                    var v = new Vector3(40f, 0, -20f)  * forceMultiplier;
+                    _rb.AddForce(v);
+                    _countAction = 0;
+                                
                 }
             }
         }
     }
-    private void OnCollisionEnter(Collision c)
-    {
-        if (c.gameObject.name == goal.name)
-        {
-            ResetGame(_posInitial);
-        }
 
+    public void OnCollisionEnter(Collision c)
+    {
         if (c.gameObject.name == paddle.name)
         {
             _paddleHits++;
-            print(_paddleHits);
             switch (_paddleHits)
             {
                 case 1:
+                    test2A = true;
                     _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos2);
                     Debug.Log("Test1 passed");
+                    OnTestEnd?.Invoke();
                     break;
                 case 2:
+                    test2B = true;
                     _testPhase = TestPhase.SecondPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test2 passed");
+                    OnTestEnd?.Invoke();
                     break;
+            }
+
+            test2A = false;
+            test2B = false;
+        }
+        else if (c.gameObject.name == goal.name)
+        {
+            switch (_paddleHits)
+            {
+                case 0:
+                    test2A = false;
+                    _testPhase = TestPhase.FirstPhase;
+                    ResetGame(_pos1);
+                    Debug.Log("Test1 Failed");
+                    OnTestEnd?.Invoke();
+                    break;
+                case 1:
+                    test2B = false;
+                    _testPhase = TestPhase.SecondPhase;
+                    Debug.Log("Test2 Failed");
+                    ResetGame(_pos2);
+                    OnTestEnd?.Invoke();
+                    break;  
             }
         }
     }
     
-    private void ResetGame(Vector3 position)
-    {
-        puck.transform.position = position;
-        _rb.velocity = Vector3.zero;
-        _countAction = 0;
-    }
-    
+     private void ResetGame(Vector3 position)
+     {
+         puck.transform.position = position;
+         _rb.velocity = Vector3.zero;
+         _countAction = 0;
+     }
 }
