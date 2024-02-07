@@ -4,17 +4,12 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class Test2 : MonoBehaviour
+public class Test2
 {
-    [SerializeField]
     private GameObject paddle;
-    [SerializeField]
     private Transform goal;
-    [SerializeField]
     private string inputAction = "Fire2";
-    [SerializeField]
-    private float forceMultiplier = 5f;
-    [SerializeField] 
+    private float forceMultiplier = 5f; 
     private GameObject puck;
     
     private Rigidbody _rb;
@@ -35,14 +30,6 @@ public class Test2 : MonoBehaviour
     }
 
     public TestPhase _testPhase;
-
-
-    // Start is called before the first frame update
-
-    public void Awake()
-    {
-        print("Test 2 has started");
-    }
     
 
     public void Start()

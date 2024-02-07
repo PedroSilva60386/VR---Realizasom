@@ -29,7 +29,7 @@ public class Test1 : MonoBehaviour
     public bool test1C;
 
     [CanBeNull] public event Action OnTestStart;
-    [CanBeNull] public event Action OnTestEnd;
+    [CanBeNull] public event Action<bool> OnTestEnd;
 
     public enum TestPhase
     {
@@ -126,21 +126,21 @@ public class Test1 : MonoBehaviour
                     _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos2);
                     Debug.Log("Test1 passed");
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(true);
                     break;
                 case 2:
                     test1B = true;
                     _testPhase = TestPhase.SecondPhase;
                     ResetGame(_pos3);
                     Debug.Log("Test2 passed");
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(true);
                     break;
                 case 3: 
                     test1C = true;
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_posInitial);
                     Debug.Log("Test3 passed");
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(true);
                     break;
             }
 
@@ -157,21 +157,21 @@ public class Test1 : MonoBehaviour
                     _testPhase = TestPhase.FirstPhase;
                     ResetGame(_pos1);
                     Debug.Log("Test1 Failed");
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(false);
                     break;
                 case 1:
                     test1B = false;
                     _testPhase = TestPhase.SecondPhase;
                     Debug.Log("Test2 Failed");
                     ResetGame(_pos2);
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(false);
                     break;
                 case 2:
                     test1C = false;
                     _testPhase = TestPhase.ThirdPhase;
                     ResetGame(_pos3);
                     Debug.Log("Test3 Failed");
-                    OnTestEnd?.Invoke();
+                    OnTestEnd?.Invoke(false);
                     break;
             }
         }

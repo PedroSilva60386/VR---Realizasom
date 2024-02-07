@@ -18,7 +18,7 @@ public class Position_Controller : MonoBehaviour
     private List<bool> _success;
     private List<float> _timePassed;
     private Puck_Behaviour _puckBehaviour;
-    private Test1 _test1;
+    private TestManager _testManager;
     private string _filePath;
     private bool _hasFileBeenWritten;
     private bool _isTestRunning = false;
@@ -29,7 +29,7 @@ public class Position_Controller : MonoBehaviour
     void Start()
     {
         _puckBehaviour = puck.GetComponent<Puck_Behaviour>();
-        _test1 = puck.GetComponent<Test1>();
+        _testManager = puck.GetComponent<TestManager>();
         
         _pongRb = pong.GetComponent<Rigidbody>();
         _puckRb = puck.GetComponent<Rigidbody>();
@@ -40,8 +40,8 @@ public class Position_Controller : MonoBehaviour
         _timePassed = new List<float>();
         _hasFileBeenWritten = false;
 
-        _test1.OnTestStart += () => _isTestRunning = true;
-        _test1.OnTestEnd += OnTestEnd;
+        _testManager.OnTestStart += () => _isTestRunning = true;
+        _testManager.OnTestEnd += OnTestEnd;
 
 
         // Specify the file path where the CSV file will be saved
@@ -49,36 +49,20 @@ public class Position_Controller : MonoBehaviour
     }
     
     
-    private void OnTestEnd()
+    private void OnTestEnd(bool won, string testName)
     {
         print("On Test End. Writing file..");
-        var success = false;
-        if (!_test1.test1A || !_test1.test1B || !_test1.test1C) success = false;
-        if (_test1.test1A || _test1.test1B || _test1.test1C) success = true;
-        ComputeFileName(success);
-        SaveDataToCSV(success);
+        ComputeFileName(won, testName);
+        SaveDataToCSV(won);
         ResetAll();
 
     }
 
-    private void ComputeFileName(bool success)
+    private void ComputeFileName(bool success, string testName)
     {
         var folderPath = @"C:\Users\fadjo\OneDrive\Ambiente de Trabalho\Pedro\Estagio\Testes";
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss_");
-        switch(_test1._testPhase)
-        {
-            case Test1.TestPhase.FirstPhase:
-                _filePath = Path.Combine(folderPath, "game_data_1_" + timestamp + "Success =" + success + ".csv");
-                break;
-            case Test1.TestPhase.SecondPhase:
-                _filePath = Path.Combine(folderPath, "game_data_2_" + timestamp + "Success =" + success + ".csv");
-                break;
-            case Test1.TestPhase.ThirdPhase:
-                _filePath = Path.Combine(folderPath, "game_data_3_" + timestamp + "Success =" + success + ".csv");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        _filePath = Path.Combine(folderPath, testName + timestamp + "Success =" + success + ".csv");
     }
 
     private void ResetAll()

@@ -22,7 +22,7 @@ public class Test_Base : MonoBehaviour
         if (_test1.test1C)
         {
             _test1.enabled = false;
-            _test2.enabled = true;
+            // _test2.enabled = true;
         }
         else
         {
