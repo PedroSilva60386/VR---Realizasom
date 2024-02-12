@@ -15,7 +15,7 @@ public interface ITest
 
 public class FirstTest : ITest
 {
-    private int totalTries = 10;
+    private int totalTries = 2;
     private int currentTry = 0;
     
     public string GetTestName()
@@ -31,7 +31,7 @@ public class FirstTest : ITest
 
     public Vector3 GetTestVelocity()
     {
-        return new Vector3(0, 0, -100f);
+        return new Vector3(0, 0, -75f);
     }
 
     public void Complete()
@@ -47,7 +47,7 @@ public class FirstTest : ITest
 
 public class SecondTest : ITest
 {
-    private int totalTries = 5;
+    private int totalTries = 2;
     private int currentTry = 0;
     private Vector3 tempPosition;
     public string GetTestName()
@@ -65,7 +65,74 @@ public class SecondTest : ITest
     public Vector3 GetTestVelocity()
     {
         float sign = tempPosition.x > 0.0 ? -1.0f : 1.0f;
-        return new Vector3(sign * 100, 0, -100f);
+        return new Vector3(sign * 75, 0, -75);
+    }
+
+    public void Complete()
+    {
+        currentTry++;
+    }
+
+    public bool HasFinished()
+    {
+        return currentTry == totalTries;
+    }
+}
+
+public class ThirdTest : ITest
+{
+    private int totalTries = 2;
+    private int currentTry = 0;
+    private Vector3 tempPosition;
+    public string GetTestName()
+    {
+        return "Test 3 - " + currentTry + " - ";
+    }
+
+    public Vector3 GetTestPosition()
+    {
+        float x = Random.Range(-0.556f, 0.556f);
+        tempPosition = new Vector3(x, 0.7998f, 1.351f);
+        return tempPosition;
+    }
+
+    public Vector3 GetTestVelocity()
+    {
+        float sign = tempPosition.x > 0.0 ? 1.0f : -1.0f;
+        return new Vector3(sign * 75, 0, -75);
+    }
+
+    public void Complete()
+    {
+        currentTry++;
+    }
+
+    public bool HasFinished()
+    {
+        return currentTry == totalTries;
+    }
+}
+public class FourthTest : ITest
+{
+    private int totalTries = 2;
+    private int currentTry = 0;
+    private Vector3 tempPosition;
+    public string GetTestName()
+    {
+        return "Test 4 - " + currentTry + " - ";
+    }
+
+    public Vector3 GetTestPosition()
+    {
+        float x = Random.Range(-0.556f, 0.556f);
+        tempPosition = new Vector3(x, 0.7998f, 1.351f);
+        return tempPosition;
+    }
+
+    public Vector3 GetTestVelocity()
+    {
+        var direction = Random.Range(-1.0f, 1.0f);
+        return new Vector3(direction * 75, 0, -75);
     }
 
     public void Complete()

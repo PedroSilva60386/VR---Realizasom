@@ -39,6 +39,8 @@ public class TestManager : MonoBehaviour
     {
         tests.Add(new FirstTest());
         tests.Add(new SecondTest());
+        tests.Add(new ThirdTest());
+        tests.Add(new FourthTest());
         currentTest = tests.First();
         currentTestIndex = 0;
         
