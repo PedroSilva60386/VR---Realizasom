@@ -60,7 +60,7 @@ public class Position_Controller : MonoBehaviour
 
     private void ComputeFileName(bool success, string testName)
     {
-        var folderPath = @"C:\Users\fadjo\OneDrive\Ambiente de Trabalho\Pedro\Estagio\Testes";
+        var folderPath = @"C:\Users\Pedro\Desktop\Realizasom\Testes";
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss_");
         _filePath = Path.Combine(folderPath, testName + timestamp + "Success =" + success + ".csv");
     }
@@ -95,13 +95,13 @@ public class Position_Controller : MonoBehaviour
         using (var sw = new StreamWriter(_filePath))
         {
             // Write header
-            sw.WriteLine("Pong_Position_X,Puck_Position_X,Puck_Position_Z,Success,Duration(sec)");
+            sw.WriteLine("Pong_Position_X.Puck_Position_X.Puck_Position_Z.Success.Duration(sec)");
 
             // Write data
             for (var i = 0; i < _pongPosition.Count; i++)
             {
-                var line = $"{_pongPosition[i].x}," +
-                           $"{_puckPosition[i].x},{_puckPosition[i].z},{success},{_timePassed[i]}";
+                var line = $"{_pongPosition[i].x}." +
+                           $"{_puckPosition[i].x}." + $"{_puckPosition[i].z}." + $"{success}." + $"{_timePassed[i]}";
                 sw.WriteLine(line);
             }
         }
