@@ -4,17 +4,22 @@ using UnityEngine;
 
 public interface ITest
 {
+    //Used to know the name of the test
     string GetTestName();
     Vector3 GetTestPosition();
+    //Used to now the velocity of the puck in a certain test
     Vector3 GetTestVelocity();
-
+    //Used to increase the current try of a test
     public void Complete();
+    //Used to check if the test is over
     public bool HasFinished();
 
 }
 
+//FIRST TEST
 public class FirstTest : ITest
 {
+    //Number of states we want in a certain test
     private int totalTries = 2;
     private int currentTry = 0;
     
@@ -44,7 +49,7 @@ public class FirstTest : ITest
         return currentTry == totalTries;
     }
 }
-
+//SECOND TEST
 public class SecondTest : ITest
 {
     private int totalTries = 2;
@@ -78,7 +83,7 @@ public class SecondTest : ITest
         return currentTry == totalTries;
     }
 }
-
+//THIRD TEST
 public class ThirdTest : ITest
 {
     private int totalTries = 2;
@@ -112,6 +117,7 @@ public class ThirdTest : ITest
         return currentTry == totalTries;
     }
 }
+//FOURTH TEST
 public class FourthTest : ITest
 {
     private int totalTries = 2;

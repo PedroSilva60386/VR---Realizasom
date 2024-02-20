@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Used to sync the pong with the controller
 public class SyncPaddleWithController : MonoBehaviour
 {
     [SerializeField]

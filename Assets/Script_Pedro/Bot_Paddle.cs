@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Used to make the IA for the bot
 public class Bot_Paddle : MonoBehaviour
 {
     [SerializeField] private GameObject puck;
@@ -19,9 +20,9 @@ public class Bot_Paddle : MonoBehaviour
     // Update is called once per frame
     void Update()   
     {
-        if(puck.transform.position.x > transform.position.x + 0.25f)
+        if(puck.transform.position.x > transform.position.x + 0.2f)
             playerMove= new Vector3(0.5f, 0,0);
-        if(puck.transform.position.x < transform.position.x - 0.25f)
+        if(puck.transform.position.x < transform.position.x - 0.2f)
             playerMove= new Vector3(-0.5f, 0,0);
     }
     

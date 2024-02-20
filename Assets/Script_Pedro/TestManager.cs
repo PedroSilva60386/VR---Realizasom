@@ -28,6 +28,7 @@ public class TestManager : MonoBehaviour
     public ITest currentTest;
     public int currentTestIndex;
     
+    //Used to reset the to the test we want 
     void ResetEverything(Vector3 position)
     {
         puck.transform.position = position;
